@@ -1,6 +1,6 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import { pushkinReducer } from '../pushkin-react/index';
+import { pushkinReducer } from 'pushkin-react';
 import error from './error';
 import userInfo from './userInfo';
 import { reducer as formReducer } from 'redux-form';

@@ -13,6 +13,7 @@
     "fastclick": "^1.0.6",
     "history": "^3.0.0",
     "imagesloaded": "*",
+    "pushkin-react": "^1.0.1",
     "rc-progress": "^2.0.6",
     "react": "^15.2.1",
     "react-bootstrap": "*",

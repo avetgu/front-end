@@ -7,7 +7,7 @@ import { Scripts } from './scripts';
 import { submitUserInfo, getUserId } from '../../../actions/userinfo';
 import Globe from './globe';
 import Progress from './progress';
-import { SurveyProvider } from '../../../pushkin-react/index';
+import { SurveyProvider } from 'pushkin-react';
 import ResultsContainer from '../../containers/ResultsContainer';
 
 import { nextPage, progressPrecent } from '../../../actions/nextpage';
@@ -82,19 +82,9 @@ class StartPage extends React.Component {
                 infoPage: state.infoPage + 1,
                 gatheringInfo: state.infoPage != 4
               };
-            }, () => {
-              if (this.state.age && this.state.education && this.state.gender && this.state.languageDisorder && this.state.takenBefore) {
-                const { age, education, gender, languageDisorder, takenBefore } = this.state;
-                this.dispatchUserInfo({
-                  age,
-                  education,
-                  gender,
-                  languageDisorder,
-                  takenBefore
-                });
-              }
             })
-          }>Next</button>
+          }>
+            Next</button>
         </div>
       );
     }
@@ -103,6 +93,16 @@ class StartPage extends React.Component {
         <SurveyProvider 
           progress={this.dispatchProgress}
           instructions={Scripts}
+          onFinish={() => {
+            const { age, education, gender, languageDisorder, takenBefore } = this.state;
+            this.dispatchUserInfo({
+              age,
+              education,
+              gender,
+              languageDisorder,
+              takenBefore
+            });
+          }}
           resultsContainer={(results) => (
             <ResultsContainer results={results} />
           )}

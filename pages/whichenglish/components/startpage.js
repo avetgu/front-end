@@ -7,7 +7,7 @@ import { Scripts } from './scripts';
 import { submitUserInfo, getUserId } from '../../../actions/userinfo';
 import Globe from './globe';
 import Progress from './progress';
-import SurveyProvider from '../../../pushkin-react/surveyprovider';
+import { SurveyProvider } from '../../../pushkin-react/index';
 import ResultsContainer from '../../containers/ResultsContainer';
 
 import { nextPage, progressPrecent } from '../../../actions/nextpage';

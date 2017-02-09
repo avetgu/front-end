@@ -1,8 +1,7 @@
 import pushkinReducer from './reducers/index';
 import SurveyProvider from './surveyprovider';
-const pushkin = {
+
+export {
   pushkinReducer,
   SurveyProvider
 };
-
-export default pushkin;

@@ -21,7 +21,6 @@ class SurveyProvider extends React.Component {
     this.buildInitial();
   }
   buildInitial = () => {
-    debugger;
     this.props.dispatch(questionList());
   }
   fetchNextQuestion = (response, answer) => {

@@ -9,6 +9,6 @@
   .wrap {
     min-height: calc(100vh - 225px);
     padding: 0px;
-    margin-top: 25px
+    margin-top: 25px;
   }
 }

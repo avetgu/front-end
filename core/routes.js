@@ -13,8 +13,16 @@ import listenerQuiz from '../experiments/listener-quiz/index';
 import Updates from '../pages/updates/index';
 import Container from '../pages/containers/container';
 import ResultsContainer from '../pages/containers/ResultsContainer';
-
+import Dashboard from '../pages/dashboard/index';
+import Loading from '../pages/loading/index';
+import Auth from './auth';
 // this definitely needs work. it's a good start though.
+const auth = new Auth();
+const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication();
+  }
+};
 function isMobile() {
   let check = false;
   (function(a) {
@@ -38,9 +46,8 @@ function ensureDesktop(nextState, replace) {
     });
   }
 }
-
 export const routes = (
-  <Route path="/" component={Container}>
+  <Route path="/" component={props => <Container auth={auth} {...props} />}>
     <IndexRoute component={HomePage} />
     <Route path="/paths" component={Paths} />
     {/*
@@ -55,6 +62,17 @@ export const routes = (
       path="/quizzes/listener-quiz"
       component={listenerQuiz}
       onEnter={ensureDesktop}
+    />
+    <Route
+      path="/dashboard"
+      component={props => <Dashboard auth={auth} {...props} />}
+    />
+    <Route
+      path="/loading"
+      component={props => {
+        handleAuthentication(props);
+        return <Loading {...props} />;
+      }}
     />
     <Route path="/projects" component={Projects} />
     <Route path="/archive" component={Archive} />

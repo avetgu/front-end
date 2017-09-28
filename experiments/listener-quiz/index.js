@@ -32,15 +32,18 @@ class listenerQuiz extends React.Component {
   hideLoading(props) {
     this.setState({loading: false});
   }
-
+  //Fixed onResize (doesn't break the quiz anymore)
   onResize() {
-    const margin = (document.documentElement.clientHeight - document.getElementById('header').scrollHeight - document.getElementById('footer').scrollHeight - 15 - this.refs.jsPsychTarget.scrollHeight) / 2;
-    if (margin > 0) {
-      this.refs.jsPsychTarget.style.marginTop = `${margin}px`;
+    try {
+      const margin = (document.documentElement.clientHeight - document.getElementById('header').scrollHeight - document.getElementById('footer').scrollHeight - 15 - this.refs.jsPsychTarget.scrollHeight) / 2;
+      if (margin > 0) {
+        this.refs.jsPsychTarget.style.marginTop = `${margin}px`;
+      }
+      else {
+        this.refs.jsPsychTarget.style.marginTop = '0px';
+      }
     }
-    else {
-      this.refs.jsPsychTarget.style.marginTop = '0px';
-    }
+    catch(err) {}
   }
 
   /* jspsych functions */

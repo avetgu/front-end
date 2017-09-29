@@ -17,14 +17,18 @@ class Updates extends React.Component {
   render() {
     return (
       <div>
-        <Image style={{display: 'none'}} src="/../../img/favicon.ico" />
-        <div >
-          <iframe src="https://gameswithwords.us14.list-manage.com/subscribe?u=0e422ef6ec0edf20f671a1eb5&id=96cab4d244" frameBorder="0" width="100%" className={s.iframe} />
+        <Image style={{ display: 'none' }} src="/../../img/favicon.ico" />
+        <div>
+          <iframe
+            src="https://gameswithwords.us14.list-manage.com/subscribe?u=0e422ef6ec0edf20f671a1eb5&id=96cab4d244"
+            frameBorder="0"
+            width="100%"
+            className={s.iframe}
+          />
         </div>
       </div>
     );
   }
-
 }
 
 export default Updates;

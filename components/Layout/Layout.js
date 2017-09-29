@@ -18,13 +18,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 class Layout extends React.Component {
-
   render() {
     return (
       <div ref={node => (this.root = node)}>
-        <Header/>
-          <div {...this.props}  /> 
-        <Footer/>
+        <Header />
+        <div {...this.props} />
+        <Footer />
       </div>
     );
   }

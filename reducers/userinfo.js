@@ -3,7 +3,7 @@ import {
   SUBMIT_USER_INFO_SUCCESS,
   SUBMIT_COMMENTS_BEGIN,
   SUBMIT_COMMENTS_SUCCESS,
-  USER_ID,
+  USER_ID
 } from '../actions/userinfo';
 
 // import {
@@ -20,26 +20,26 @@ export default function userInfo(state = {}, action) {
         takenBefore: action.data.takenBefore,
         languageDisorder: action.data.languageDisorder,
         education: action.data.education,
-        isFetching: false,
+        isFetching: false
       };
     }
     case SUBMIT_USER_INFO_BEGIN: {
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       };
     }
     case USER_ID: {
       return {
         ...state,
         id: action.id,
-        isFetching: false,
+        isFetching: false
       };
     }
     case SUBMIT_COMMENTS_BEGIN: {
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       };
     }
     case SUBMIT_COMMENTS_SUCCESS: {
@@ -47,7 +47,7 @@ export default function userInfo(state = {}, action) {
         ...state,
         isFetching: false,
         nativeLanguages: action.data.nativeLanguages,
-        primaryLanguages: action.data.primaryLanguages,
+        primaryLanguages: action.data.primaryLanguages
       };
     }
     // case SET_RESULTS: {

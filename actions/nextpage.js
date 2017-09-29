@@ -4,13 +4,13 @@ export const PROGRESS_PRECENT = 'PROGRESS_PRECENT';
 export function nextPage(pageInfo) {
   return {
     type: NEXT_PAGE,
-    pageInfo,
+    pageInfo
   };
 }
 
 export function progressPrecent(precent) {
   return {
     type: PROGRESS_PRECENT,
-    precent,
+    precent
   };
 }

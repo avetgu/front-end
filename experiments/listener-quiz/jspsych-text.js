@@ -10,7 +10,6 @@
  */
 
 jsPsych.plugins.text = (function() {
-
   var plugin = {};
 
   plugin.info = {
@@ -24,7 +23,10 @@ jsPsych.plugins.text = (function() {
         description: ''
       },
       choices: {
-        type: [jsPsych.plugins.parameterType.KEYCODE, jsPsych.plugins.parameterType.SELECT],
+        type: [
+          jsPsych.plugins.parameterType.KEYCODE,
+          jsPsych.plugins.parameterType.SELECT
+        ],
         options: ['mouse'],
         array: true,
         default: undefined,
@@ -32,10 +34,9 @@ jsPsych.plugins.text = (function() {
         description: ''
       }
     }
-  }
+  };
 
   plugin.trial = function(display_element, trial) {
-
     trial.choices = trial.choices || jsPsych.ALL_KEYS;
 
     // if any trial variables are functions
@@ -47,21 +48,18 @@ jsPsych.plugins.text = (function() {
     display_element.innerHTML = trial.text;
 
     var after_response = function(info) {
-
       display_element.innerHTML = ''; // clear the display
 
       var trialdata = {
-        "rt": info.rt,
-        "key_press": info.key
-      }
+        rt: info.rt,
+        key_press: info.key
+      };
 
       jsPsych.finishTrial(trialdata);
-
     };
 
     var mouse_listener = function(e) {
-
-      var rt = (new Date()).getTime() - start_time;
+      var rt = new Date().getTime() - start_time;
 
       display_element.removeEventListener('click', mouse_listener);
 
@@ -69,13 +67,12 @@ jsPsych.plugins.text = (function() {
         key: 'mouse',
         rt: rt
       });
-
     };
 
     // check if key is 'mouse'
     if (trial.choices == 'mouse') {
       display_element.addEventListener(mouse_listener);
-      var start_time = (new Date()).getTime();
+      var start_time = new Date().getTime();
     } else {
       jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
@@ -85,7 +82,6 @@ jsPsych.plugins.text = (function() {
         allow_held_key: false
       });
     }
-
   };
 
   return plugin;

@@ -99,14 +99,8 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-1"
-    ],
-    "plugins": [
-      "transform-runtime"
-    ]
+    "presets": ["react", "es2015", "stage-1"],
+    "plugins": ["transform-runtime"]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -122,11 +116,14 @@
     }
   },
   "scripts": {
-    "eslint": "eslint components core pages test utils main.js run.js webpack.config.js",
+    "eslint":
+      "eslint components core pages test utils main.js run.js webpack.config.js",
     "stylelint": "stylelint \"components/**/*.css\" \"pages/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
+    "format":
+      "for f in \"components/**/*.js\" \"pages/**/*.js\" \"core/**/*.js\" \"actions/**/*.js\" \"experiments/**/*.js\" \"reducers/**/*.js\"; do ./node_modules/.bin/prettier $f --write --single-quote; done",
     "clean": "node run clean",
     "build": "node run build",
     "build:debug": "node run build --debug",

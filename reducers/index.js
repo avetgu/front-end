@@ -30,5 +30,5 @@ export const rootReducer = combineReducers({
   nextpage,
   userInfo,
   routing: routerReducer,
-  form: formReducer,
+  form: formReducer
 });

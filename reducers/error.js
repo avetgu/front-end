@@ -5,7 +5,7 @@ export default function error(state = { data: null }, action) {
     case ERROR: {
       return {
         ...state,
-        data: action.err,
+        data: action.err
       };
     }
     default:

@@ -12,33 +12,37 @@ export default class MultiSelect extends Component {
   render() {
     return (
       <div>
-        {this.props.value.length > 0 && this.props.value.map(token => (
-          <span className={s.token}>
-            {token}
-            <span
-              className={s.closeButton}
-              onClick={() => {
-                const index = this.props.value.indexOf(token);
-                const tokens = [
-                  ...this.props.value.slice(0, index),
-                  ...this.props.value.slice(index + 1)
-                ];
-                this.props.onChange(tokens);
-              }}
-            >
-              x
+        {this.props.value.length > 0 &&
+          this.props.value.map(token => (
+            <span className={s.token}>
+              {token}
+              <span
+                className={s.closeButton}
+                onClick={() => {
+                  const index = this.props.value.indexOf(token);
+                  const tokens = [
+                    ...this.props.value.slice(0, index),
+                    ...this.props.value.slice(index + 1)
+                  ];
+                  this.props.onChange(tokens);
+                }}
+              >
+                x
+              </span>
             </span>
-          </span>
-        ))}
+          ))}
         <select
           defaultValue=""
           value={this.state.value}
-          onChange={e => this.props.onChange([...this.props.value, e.target.value])}
+          onChange={e =>
+            this.props.onChange([...this.props.value, e.target.value])}
         >
-          <option disabled value="">{this.props.defaultMessage}</option>
+          <option disabled value="">
+            {this.props.defaultMessage}
+          </option>
           {this.props.options
-              .filter(option => this.state.tokens.indexOf(option) < 0)
-              .map(option => <option value={option}>{option}</option>)}
+            .filter(option => this.state.tokens.indexOf(option) < 0)
+            .map(option => <option value={option}>{option}</option>)}
         </select>
       </div>
     );

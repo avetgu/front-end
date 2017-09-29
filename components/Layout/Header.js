@@ -6,8 +6,7 @@ import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends React.Component {
-
-  constructor(){
+  constructor() {
     super();
     this.state = { mobile: false };
     this.updateDimensions = this.updateDimensions.bind(this);
@@ -22,20 +21,18 @@ class Header extends React.Component {
   }
 
   home() {
-    if ((window.location.pathname.toString()).split('/')[1] === '') {
+    if (window.location.pathname.toString().split('/')[1] === '') {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   updateDimensions() {
     if (window.innerWidth < 768) {
-      this.setState({mobile: true});
-    }
-    else {
-      this.setState({mobile: false});
+      this.setState({ mobile: true });
+    } else {
+      this.setState({ mobile: false });
     }
   }
 
@@ -51,99 +48,113 @@ class Header extends React.Component {
               }}
             />
           </Link>
-        <b.Image style={{display: 'none'}} src={require('../../img/favicon.ico')}  />
+          <b.Image
+            style={{ display: 'none' }}
+            src={require('../../img/favicon.ico')}
+          />
         </header>
       );
     } else if (this.state.mobile && !this.home()) {
       return (
-        <header className={s.header} id="header" ref={node => (this.root = node)} >
-          <b.Image src={require('../../img/gww_logo.png')} className={s.logo} style={{marginTop: '5px', height: '90px'}}/>
+        <header
+          className={s.header}
+          id="header"
+          ref={node => (this.root = node)}
+        >
+          <b.Image
+            src={require('../../img/gww_logo.png')}
+            className={s.logo}
+            style={{ marginTop: '5px', height: '90px' }}
+          />
           <div className={s.navWrapper}>
             <b.Nav bsStyle="pills">
-              <b.NavDropdown active title="Menu" style={{padding: '3px', marginTop: '2px'}} id="bg-nested-dropdown">
+              <b.NavDropdown
+                active
+                title="Menu"
+                style={{ padding: '3px', marginTop: '2px' }}
+                id="bg-nested-dropdown"
+              >
                 <LinkContainer to="/paths">
                   <b.MenuItem>
-                    <font className={s.navLinks}>
-                        Paths
-                    </font>
+                    <font className={s.navLinks}>Paths</font>
                   </b.MenuItem>
                 </LinkContainer>
                 <LinkContainer to="/projects">
                   <b.MenuItem>
-                    <font className={s.navLinks}>
-                        Projects
-                    </font>
+                    <font className={s.navLinks}>Projects</font>
                   </b.MenuItem>
                 </LinkContainer>
                 <LinkContainer to="/quizzes">
                   <b.MenuItem>
-                    <font className={s.navLinks}>
-                        Quizzes
-                    </font>
+                    <font className={s.navLinks}>Quizzes</font>
                   </b.MenuItem>
                 </LinkContainer>
                 <LinkContainer to="/findings">
                   <b.MenuItem>
-                    <font className={s.navLinks}>
-                        Findings
-                    </font>
+                    <font className={s.navLinks}>Findings</font>
                   </b.MenuItem>
                 </LinkContainer>
                 <LinkContainer to="/about">
                   <b.MenuItem>
-                    <font className={s.navLinks}>
-                        About
-                    </font>
+                    <font className={s.navLinks}>About</font>
                   </b.MenuItem>
                 </LinkContainer>
                 <b.MenuItem href="https://blog.gameswithwords.org/">
-                  <font className={s.navLinks}>
-                    Blog
-                  </font>
+                  <font className={s.navLinks}>Blog</font>
                 </b.MenuItem>
               </b.NavDropdown>
             </b.Nav>
           </div>
         </header>
       );
-    }
-    else {
+    } else {
       return (
-        <header className={s.header} id="header" ref={node => (this.root = node)}>
-          {this.home() ? <b.Image src={require('../../img/logo_square-min.png')}  responsive /> : <b.Image src={require('../../img/gww_logo.png')} className={s.logo} />}
-          <b.Nav style={{margin: '0px', fontFamily: '\'Ribeye Marrow\', cursive', fontSize: '20px', backgroundColor: '#a9a9a9'}} bsStyle="tabs" justified>
-              <LinkContainer to="/paths">
-            <b.NavItem>
-                Paths
-            </b.NavItem>
-              </LinkContainer>
-            <LinkContainer to="/projects">
-            <b.NavItem>
-              Projects
-            </b.NavItem>
+        <header
+          className={s.header}
+          id="header"
+          ref={node => (this.root = node)}
+        >
+          {this.home() ? (
+            <b.Image
+              src={require('../../img/logo_square-min.png')}
+              responsive
+            />
+          ) : (
+            <b.Image
+              src={require('../../img/gww_logo.png')}
+              className={s.logo}
+            />
+          )}
+          <b.Nav
+            style={{
+              margin: '0px',
+              fontFamily: "'Ribeye Marrow', cursive",
+              fontSize: '20px',
+              backgroundColor: '#a9a9a9'
+            }}
+            bsStyle="tabs"
+            justified
+          >
+            <LinkContainer to="/paths">
+              <b.NavItem>Paths</b.NavItem>
             </LinkContainer>
-              <LinkContainer to="/quizzes">
-            <b.NavItem>
-                Quizzes
-            </b.NavItem>
-              </LinkContainer>
-              <LinkContainer to="/findings">
-            <b.NavItem>
-                Findings
-            </b.NavItem>
+            <LinkContainer to="/projects">
+              <b.NavItem>Projects</b.NavItem>
+            </LinkContainer>
+            <LinkContainer to="/quizzes">
+              <b.NavItem>Quizzes</b.NavItem>
+            </LinkContainer>
+            <LinkContainer to="/findings">
+              <b.NavItem>Findings</b.NavItem>
             </LinkContainer>
             <LinkContainer to="/about">
-              <b.NavItem>
-                  About
-              </b.NavItem>
+              <b.NavItem>About</b.NavItem>
             </LinkContainer>
-            <b.NavItem href="https://blog.gameswithwords.org/">
-              Blog
-            </b.NavItem>
+            <b.NavItem href="https://blog.gameswithwords.org/">Blog</b.NavItem>
           </b.Nav>
         </header>
       );
-    };
+    }
   }
 }
 

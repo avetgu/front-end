@@ -8,8 +8,7 @@
  *
  **/
 
-jsPsych.plugins["single-audio"] = (function() {
-
+jsPsych.plugins['single-audio'] = (function() {
   var plugin = {};
 
   jsPsych.pluginAPI.registerPreload('single-audio', 'stimulus', 'audio');
@@ -54,18 +53,23 @@ jsPsych.plugins["single-audio"] = (function() {
         default: false,
         no_function: false,
         description: ''
-      },
+      }
     }
-  }
+  };
 
   plugin.trial = function(display_element, trial) {
-
     // default parameters
     trial.choices = trial.choices || jsPsych.ALL_KEYS;
-    trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
-    trial.trial_ends_after_audio = (typeof trial.trial_ends_after_audio === 'undefined') ? false : trial.trial_ends_after_audio;
+    trial.response_ends_trial =
+      typeof trial.response_ends_trial === 'undefined'
+        ? true
+        : trial.response_ends_trial;
+    trial.trial_ends_after_audio =
+      typeof trial.trial_ends_after_audio === 'undefined'
+        ? false
+        : trial.trial_ends_after_audio;
     trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
-    trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
+    trial.prompt = typeof trial.prompt === 'undefined' ? '' : trial.prompt;
 
     // if any trial variables are functions
     // this evaluates the function and replaces
@@ -74,7 +78,7 @@ jsPsych.plugins["single-audio"] = (function() {
 
     // setup stimulus
     var context = jsPsych.pluginAPI.audioContext();
-    if(context !== null){
+    if (context !== null) {
       var source = context.createBufferSource();
       source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.stimulus);
       source.connect(context.destination);
@@ -84,18 +88,18 @@ jsPsych.plugins["single-audio"] = (function() {
     }
 
     // set up end event if trial needs it
-    if(trial.trial_ends_after_audio){
-      if(context !== null){
+    if (trial.trial_ends_after_audio) {
+      if (context !== null) {
         source.onended = function() {
           end_trial();
-        }
+        };
       } else {
         audio.addEventListener('end', end_trial);
       }
     }
 
     // show prompt if there is one
-    if (trial.prompt !== "") {
+    if (trial.prompt !== '') {
       display_element.innerHTML = trial.prompt;
     }
 
@@ -107,12 +111,11 @@ jsPsych.plugins["single-audio"] = (function() {
 
     // function to end trial when it is time
     var end_trial = function() {
-
       // kill any remaining setTimeout handlers
       jsPsych.pluginAPI.clearAllTimeouts();
 
       // stop the audio file if it is playing
-      if(context !== null){
+      if (context !== null) {
         source.stop();
       } else {
         audio.pause();
@@ -123,9 +126,9 @@ jsPsych.plugins["single-audio"] = (function() {
 
       // gather the data to store for the trial
       var trial_data = {
-        "rt": context !== null ? response.rt * 1000 : response.rt,
-        "stimulus": trial.stimulus,
-        "key_press": response.key
+        rt: context !== null ? response.rt * 1000 : response.rt,
+        stimulus: trial.stimulus,
+        key_press: response.key
       };
 
       // clear the display
@@ -137,7 +140,6 @@ jsPsych.plugins["single-audio"] = (function() {
 
     // function to handle responses by the subject
     var after_response = function(info) {
-
       // only record the first response
       if (response.key == -1) {
         response = info;
@@ -149,7 +151,7 @@ jsPsych.plugins["single-audio"] = (function() {
     };
 
     // start audio
-    if(context !== null){
+    if (context !== null) {
       startTime = context.currentTime + 0.1;
       source.start(startTime);
     } else {
@@ -157,7 +159,7 @@ jsPsych.plugins["single-audio"] = (function() {
     }
 
     // start the response listener
-    if(context !== null) {
+    if (context !== null) {
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
         valid_responses: trial.choices,
@@ -183,7 +185,6 @@ jsPsych.plugins["single-audio"] = (function() {
         end_trial();
       }, trial.timing_response);
     }
-
   };
 
   return plugin;

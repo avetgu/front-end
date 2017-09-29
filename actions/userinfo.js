@@ -11,7 +11,7 @@ export const USER_ID = 'USER_ID';
 function sendUserId(id) {
   return {
     type: USER_ID,
-    id,
+    id
   };
 }
 function submitUserInfoBegin() {
@@ -22,38 +22,40 @@ function submitUserInfoBegin() {
 function submitUserInfoSuccess(data) {
   return {
     type: SUBMIT_USER_INFO_SUCCESS,
-    data,
+    data
   };
 }
 export function getUserId() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(submitUserInfoBegin());
-    return local.get('initialQuestions')
-    .then((resp) => {
-      if (resp.error) {
-        return dispatch(error(resp.error));
-      }
-      return dispatch(sendUserId(resp.data.user.id));
-    })
-    .catch((err) => {
-      return dispatch(error(err));
-    });
+    return local
+      .get('initialQuestions')
+      .then(resp => {
+        if (resp.error) {
+          return dispatch(error(resp.error));
+        }
+        return dispatch(sendUserId(resp.data.user.id));
+      })
+      .catch(err => {
+        return dispatch(error(err));
+      });
   };
 }
 export function submitUserInfo(info) {
   return (dispatch, getState) => {
     const state = getState();
     const userId = state.userInfo.id;
-    const payload = {...info, id: userId};
+    const payload = { ...info, id: userId };
     dispatch(submitUserInfoBegin());
-    local.put(`users/${userId}`, payload, {
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(resp => resp.data)
-    .then(data => {
-      return dispatch(submitUserInfoSuccess(data))
-    });
-  }
+    local
+      .put(`users/${userId}`, payload, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(resp => resp.data)
+      .then(data => {
+        return dispatch(submitUserInfoSuccess(data));
+      });
+  };
 }
 
 function submitCommentsBegin() {
@@ -72,7 +74,7 @@ export function submitComments(comments) {
       if (comments.nativeLanguages) {
         payload = {
           userId,
-          ...comments,
+          ...comments
         };
       }
 
@@ -95,14 +97,14 @@ export function submitComments(comments) {
             }
           }
           const obj = {
-            nativeLanguages: [ ...nativeLanguages ],
-            primaryLanguages: [ ...primaryLanguages ]
+            nativeLanguages: [...nativeLanguages],
+            primaryLanguages: [...primaryLanguages]
           };
           return dispatch(submitCommentsSuccess(obj));
         })
         .then(() => {
-          browserHistory.push(`/results/user/${userId}`)
-        })
+          browserHistory.push(`/results/user/${userId}`);
+        });
     } else {
       throw new Error(
         'there is no user id to attach these comments and demographic data too'

@@ -8,9 +8,7 @@
  *
  */
 
-
 jsPsych.plugins['survey-text'] = (function() {
-
   var plugin = {};
 
   plugin.info = {
@@ -45,11 +43,10 @@ jsPsych.plugins['survey-text'] = (function() {
         description: ''
       }
     }
-  }
+  };
 
   plugin.trial = function(display_element, trial) {
-
-    trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
+    trial.preamble = typeof trial.preamble == 'undefined' ? '' : trial.preamble;
     if (typeof trial.rows == 'undefined') {
       trial.rows = [];
       for (var i = 0; i < trial.questions.length; i++) {
@@ -69,47 +66,66 @@ jsPsych.plugins['survey-text'] = (function() {
     trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
     // show preamble text
-    display_element.innerHTML += '<div id="jspsych-survey-text-preamble" class="jspsych-survey-text-preamble">'+trial.preamble+'</div>';
+    display_element.innerHTML +=
+      '<div id="jspsych-survey-text-preamble" class="jspsych-survey-text-preamble">' +
+      trial.preamble +
+      '</div>';
 
     // add questions
     for (var i = 0; i < trial.questions.length; i++) {
-      display_element.innerHTML += '<div id="jspsych-survey-text-"'+i+'" class="jspsych-survey-text-question" style="margin: 2em 0em;">'+
-        '<p class="jspsych-survey-text">' + trial.questions[i] + '</p>'+
-        '<textarea name="#jspsych-survey-text-response-' + i + '" cols="' + trial.columns[i] + '" rows="' + trial.rows[i] + '"></textarea>'+
+      display_element.innerHTML +=
+        '<div id="jspsych-survey-text-"' +
+        i +
+        '" class="jspsych-survey-text-question" style="margin: 2em 0em;">' +
+        '<p class="jspsych-survey-text">' +
+        trial.questions[i] +
+        '</p>' +
+        '<textarea name="#jspsych-survey-text-response-' +
+        i +
+        '" cols="' +
+        trial.columns[i] +
+        '" rows="' +
+        trial.rows[i] +
+        '"></textarea>' +
         '</div>';
     }
 
     // add submit button
-    display_element.innerHTML += '<button id="jspsych-survey-text-next" class="jspsych-btn jspsych-survey-text">Submit Answers</button>';
+    display_element.innerHTML +=
+      '<button id="jspsych-survey-text-next" class="jspsych-btn jspsych-survey-text">Submit Answers</button>';
 
-    display_element.querySelector('#jspsych-survey-text-next').addEventListener('click', function() {
-      // measure response time
-      var endTime = (new Date()).getTime();
-      var response_time = endTime - startTime;
+    display_element
+      .querySelector('#jspsych-survey-text-next')
+      .addEventListener('click', function() {
+        // measure response time
+        var endTime = new Date().getTime();
+        var response_time = endTime - startTime;
 
-      // create object to hold responses
-      var question_data = {};
-      var matches = display_element.querySelectorAll('div.jspsych-survey-text-question');
-      for(var index=0; index<matches.length; index++){
-        var id = "Q" + index;
-        var val = matches[index].querySelector('textarea').value;
-        var obje = {};
-        obje[id] = val;
-        Object.assign(question_data, obje);
-      }
-      // save data
-      var trialdata = {
-        "rt": response_time,
-        "responses": JSON.stringify(question_data)
-      };
+        // create object to hold responses
+        var question_data = {};
+        var matches = display_element.querySelectorAll(
+          'div.jspsych-survey-text-question'
+        );
+        for (var index = 0; index < matches.length; index++) {
+          var id = 'Q' + index;
+          var val = matches[index].querySelector('textarea').value;
+          var obje = {};
+          obje[id] = val;
+          Object.assign(question_data, obje);
+        }
+        // save data
+        var trialdata = {
+          rt: response_time,
+          responses: JSON.stringify(question_data)
+        };
 
-      display_element.innerHTML = '';
+        display_element.innerHTML = '';
 
-      // next trial
-      jsPsych.finishTrial(trialdata);
-    });
+        // next trial
+        jsPsych.finishTrial(trialdata);
+      });
 
-    var startTime = (new Date()).getTime();
+    var startTime = new Date().getTime();
   };
 
   return plugin;

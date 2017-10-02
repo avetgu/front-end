@@ -27,7 +27,21 @@ class Header extends React.Component {
       return false;
     }
   }
-
+  showDashboardOrLogIn = (loggedIn, mobile) => {
+    if (mobile) {
+      if (loggedIn) {
+        return <font className={s.navLinks}>Dashboard</font>;
+      } else {
+        return <font className={s.navLinks}>Log in</font>;
+      }
+    } else {
+      if (loggedIn) {
+        return <b.NavItem>Dashboard</b.NavItem>;
+      } else {
+        return <b.NavItem>Log In</b.NavItem>;
+      }
+    }
+  };
   updateDimensions() {
     if (window.innerWidth < 768) {
       this.setState({ mobile: true });
@@ -37,6 +51,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const loggedIn = this.props.isAuthenticated();
     if (this.home()) {
       return (
         <header id="header">
@@ -102,6 +117,11 @@ class Header extends React.Component {
                 <b.MenuItem href="https://blog.gameswithwords.org/">
                   <font className={s.navLinks}>Blog</font>
                 </b.MenuItem>
+                <LinkContainer to="/dashboard">
+                  <b.MenuItem>
+                    {this.showDashboardOrLogIn(loggedIn, 'mobile')}
+                  </b.MenuItem>
+                </LinkContainer>
               </b.NavDropdown>
             </b.Nav>
           </div>
@@ -151,6 +171,9 @@ class Header extends React.Component {
               <b.NavItem>About</b.NavItem>
             </LinkContainer>
             <b.NavItem href="https://blog.gameswithwords.org/">Blog</b.NavItem>
+            <LinkContainer to="/dashboard">
+              {this.showDashboardOrLogIn(loggedIn)}
+            </LinkContainer>
           </b.Nav>
         </header>
       );

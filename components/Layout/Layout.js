@@ -14,15 +14,14 @@ import Header from './Header';
 import Footer from './Footer';
 import * as b from 'react-bootstrap';
 import s from './Layout.css';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 class Layout extends React.Component {
   render() {
+    console.log('this.props in layout', this.props);
     return (
-      <div ref={node => (this.root = node)}>
-        <Header />
-        <div {...this.props} />
+      <div>
+        <Header isAuthenticated={this.props.isAuthenticated} />
+        {this.props.children}
         <Footer />
       </div>
     );

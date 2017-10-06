@@ -16,23 +16,23 @@
     "imagesloaded": "*",
     "pushkin-react": "^1.1.0",
     "rc-progress": "^2.0.6",
-    "react": "^15.2.1",
+    "react": "^15.1.0",
     "react-bootstrap": "*",
-    "react-resize-detector": "*",
-    "react-dom": "^15.2.1",
+    "react-dom": "15.1.0",
     "react-foundation": "*",
     "react-iframe": "*",
-    "react-mdl": "^1.9.0",
-    "react-redux": "^4.4.5",
+    "react-mdl": "1.9.0",
+    "react-redux": "4.4.5",
+    "react-resize-detector": "*",
     "react-router": "^3.0.0",
-    "react-router-bootstrap": "^0.23.1",
-    "react-router-redux": "^4.0.7",
-    "react-router-sitemap": "^1.1.1",
-    "react-share": "^1.11.0",
-    "react-skylight": "^0.4.1",
-    "react-social-icons": "*",
-    "react-tap-event-plugin": "*",
-    "redux": "^3.5.2",
+    "react-router-bootstrap": "0.23.1",
+    "react-router-redux": "4.0.7",
+    "react-router-sitemap": "1.1.1",
+    "react-share": "1.11.0",
+    "react-skylight": "0.4.1",
+    "react-social-icons": "2.6.0",
+    "react-tap-event-plugin": "^1.0.0",
+    "redux": "3.5.2",
     "redux-form": "^6.5.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
@@ -99,8 +99,14 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "babel": {
-    "presets": ["react", "es2015", "stage-1"],
-    "plugins": ["transform-runtime"]
+    "presets": [
+      "react",
+      "es2015",
+      "stage-1"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -116,14 +122,12 @@
     }
   },
   "scripts": {
-    "eslint":
-      "eslint components core pages test utils main.js run.js webpack.config.js",
+    "eslint": "eslint components core pages test utils main.js run.js webpack.config.js",
     "stylelint": "stylelint \"components/**/*.css\" \"pages/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
-    "format":
-      "for f in \"components/**/*.js\" \"pages/**/*.js\" \"core/**/*.js\" \"actions/**/*.js\" \"experiments/**/*.js\" \"reducers/**/*.js\"; do ./node_modules/.bin/prettier $f --write --single-quote; done",
+    "format": "for f in \"components/**/*.js\" \"pages/**/*.js\" \"core/**/*.js\" \"actions/**/*.js\" \"experiments/**/*.js\" \"reducers/**/*.js\"; do ./node_modules/.bin/prettier $f --write --single-quote; done",
     "clean": "node run clean",
     "build": "node run build",
     "build:debug": "node run build --debug",
